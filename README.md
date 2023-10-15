@@ -21,7 +21,7 @@ The following Lambda Language Runtimes are supported:
 > **Warning**
 > This application is not ready for production use. It was written for demonstration and educational purposes. Review the [Security](#security) section of this README and consult with your security team before deploying this stack. No warranty is implied in this example.
 
-## Deployment instructions
+## Deployment Instructions
 
 ### Prerequisites
 
