@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  lambda-bedrock-app
+
+  Sample SAM Template for lambda-bedrock-app
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 20
+    MemorySize: 512
+
+Resources:
+  LambdaBedrockFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: LambdaBedrockFunction
+      Handler: lambdabedrock.App::handleRequest
+      Runtime: java17
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: bedrock:InvokeModel
+              Resource: "arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-v2"
+
+Outputs:
+  LambdaBedrockFunction:
+    Description: "Lambda Bedrock Integration Function ARN"
+    Value: !GetAtt LambdaBedrockFunction.Arn
+  LambdaBedrockFunctionIamRole:
+    Description: "Implicit IAM Role created for Lambda Bedrock Integration Function"
+    Value: !GetAtt LambdaBedrockFunctionRole.Arn
