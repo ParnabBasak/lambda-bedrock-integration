@@ -42,6 +42,10 @@ By default, this application uses **Anthropic Claude v2** to generate responses.
 > Before you can use these models with this application, **you must request access in the Amazon Bedrock console**. See the [Model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) section of the Bedrock User Guide for detailed instructions.
 > By default, this application is configured to use Amazon Bedrock in the supported Region. Make sure you request model access in that Region (this does not have to be the same Region that you deploy this stack to).
 
+### Implementing language specific code
+
+The respective named sub directories have the detailed instructions to deploy the AWS SAM application. Navigate to your preferred language runtime and follow the instructions there.
+
 ## License
 
 This library is licensed under the MIT-0 License. See the [LICENSE](LICENSE) file.
