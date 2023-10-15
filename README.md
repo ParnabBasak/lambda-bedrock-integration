@@ -14,6 +14,8 @@ The following Lambda Language Runtimes are supported:
 | NodeJS | v18 | 3.428.0 |
 | Python | v3.11 | 1.28.57 |
 
+## Deployment Architecture
+
 ![Serverless Bedrpck Integration architecture](aws-sam-deployments.png "Serverless Bedrpck Integration architecture")
 
 > **Warning**
