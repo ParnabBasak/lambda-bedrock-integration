@@ -3,6 +3,7 @@
 This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI to integrate with Amazon Bedrock. It includes the following files and folders.
 
 **Runtime Supported = python3.11**
+
 **Model Supported = Anthropic Claude v2**
 
 - app.py - Code for the application's Lambda function.
