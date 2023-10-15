@@ -8,7 +8,7 @@ This project contains source code and supporting files for a serverless applicat
 
 It includes the following files and folders.
 - app.mjs - Code for the application's Lambda function.
-- package.json - Included dependency library "@aws-sdk/client-bedrock-runtime": "^3.428.0",
+- package.json - Included dependency library aws-sdk/client-bedrock-runtime = 3.428.0
 - events - Invocation events that you can use to invoke the function.
 - LambdaBedrock/tests - Unit tests for the application code. 
 - template.yaml - A template that defines the application's AWS resources.
