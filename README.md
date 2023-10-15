@@ -14,6 +14,11 @@ The following Lambda Language Runtimes are supported:
 | NodeJS | v18 | 3.428.0 |
 | Python | v3.11 | 1.28.57 |
 
+> **Warning**
+> This application is not ready for production use. It was written for demonstration and educational purposes. Review the [Security](#security) section of this README and consult with your security team before deploying this stack. No warranty is implied in this example.
+
+## Deployment instructions
+
 ### Prerequisites
 
 - [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
@@ -27,10 +32,15 @@ Clone this repository:
 git clone git@github.com:ParnabBasak/lambda-bedrock-integration.git
 ```
 
-> **Warning**
-> This application is not ready for production use. It was written for demonstration and educational purposes. Review the [Security](#security) section of this README and consult with your security team before deploying this stack. No warranty is implied in this example.
+### Amazon Bedrock setup
 
-## Deployment instructions
+This application can be used with a variety of LLMs via Amazon Bedrock. See [Supported models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html#models-supported) for a complete list.
+
+By default, this application uses **Titan Embeddings G1 - Text** to generate embeddings and **Anthropic's Claude v2** model for responses.
+
+> **Important**
+> Before you can use these models with this application, **you must request access in the Amazon Bedrock console**. See the [Model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) section of the Bedrock User Guide for detailed instructions.
+> By default, this application is configured to use Amazon Bedrock in the `us-east-1` Region, make sure you request model access in that Region (this does not have to be the same Region that you deploy this stack to).
 
 ## License
 
