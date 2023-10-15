@@ -14,6 +14,8 @@ The following Lambda Language Runtimes are supported:
 | NodeJS | v18 | 3.428.0 |
 | Python | v3.11 | 1.28.57 |
 
+![Serverless Bedrpck Integration architecture](aws-sam-deployments.png "Serverless Bedrpck Integration architecture")
+
 > **Warning**
 > This application is not ready for production use. It was written for demonstration and educational purposes. Review the [Security](#security) section of this README and consult with your security team before deploying this stack. No warranty is implied in this example.
 
@@ -40,7 +42,7 @@ By default, this application uses **Anthropic Claude v2** to generate responses.
 
 > **Important**
 > Before you can use these models with this application, **you must request access in the Amazon Bedrock console**. See the [Model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) section of the Bedrock User Guide for detailed instructions.
-> By default, this application is configured to use Amazon Bedrock in the supported Region. Make sure you request model access in that Region (this does not have to be the same Region that you deploy this stack to).
+> By default, this application is configured to use Amazon Bedrock in the [supported Region](https://docs.aws.amazon.com/bedrock/latest/userguide/endpointsTable.html). Make sure you request model access in that Region (this does not have to be the same Region that you deploy this stack to).
 
 ### Implementing language specific code
 
