@@ -1,11 +1,12 @@
 # lambda-bedrock-app
 
-This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI to integrate with Amazon Bedrock. It includes the following files and folders.
+This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI to integrate with Amazon Bedrock. 
 
 **Runtime Supported = python3.11**
 
 **Model Supported = Anthropic Claude v2**
 
+It includes the following files and folders:
 - app.py - Code for the application's Lambda function.
 - requirements.txt - Dependency inclusion of boto3==1.28.57
 - events - Invocation events that you can use to invoke the function.
@@ -72,13 +73,6 @@ Run functions locally and invoke them with the `sam local invoke` command.
 
 ```bash
 lambda-bedrock-app$ sam local invoke LambdaBedrockFunction --event events/event.json
-```
-
-The SAM CLI can also emulate your application's API. Use the `sam local start-api` to run the API locally on port 3000.
-
-```bash
-lambda-bedrock-app$ sam local start-api
-lambda-bedrock-app$ curl http://localhost:3000/
 ```
 
 ## Add a resource to your application
