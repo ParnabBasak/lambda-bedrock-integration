@@ -26,6 +26,7 @@ The following Lambda Language Runtimes are supported:
 ### Prerequisites
 
 - [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
+- * [Python 3 installed](https://www.python.org/downloads/) to build and deploy using AWS SAM
 - Language specific runtimes for local testing
 
 ### Cloning the repository

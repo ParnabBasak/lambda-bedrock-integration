@@ -1,13 +1,17 @@
 # lambda-bedrock-app
 
-This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
+This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI to integrate with Amazon Bedrock. It includes the following files and folders.
 
-- hello_world - Code for the application's Lambda function.
+**Runtime Supported = python3.11**
+**Model Supported = Anthropic Claude v2**
+
+- app.py - Code for the application's Lambda function.
+- requirements.txt - Dependency inclusion of boto3==1.28.57
 - events - Invocation events that you can use to invoke the function.
 - tests - Unit tests for the application code. 
 - template.yaml - A template that defines the application's AWS resources.
 
-The application uses several AWS resources, including Lambda functions and an API Gateway API. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code.
+The application uses only Lambda function resource. This resource is defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code.
 
 If you prefer to use an integrated development environment (IDE) to build and test your application, you can use the AWS Toolkit.  
 The AWS Toolkit is an open source plug-in for popular IDEs that uses the SAM CLI to build and deploy serverless applications on AWS. The AWS Toolkit also adds a simplified step-through debugging experience for Lambda function code. See the following links to get started.
@@ -37,7 +41,7 @@ To use the SAM CLI, you need the following tools.
 To build and deploy your application for the first time, run the following in your shell:
 
 ```bash
-sam build --use-container
+sam build
 sam deploy --guided
 ```
 
@@ -49,7 +53,7 @@ The first command will build the source of your application. The second command 
 * **Allow SAM CLI IAM role creation**: Many AWS SAM templates, including this example, create AWS IAM roles required for the AWS Lambda function(s) included to access AWS services. By default, these are scoped down to minimum required permissions. To deploy an AWS CloudFormation stack which creates or modifies IAM roles, the `CAPABILITY_IAM` value for `capabilities` must be provided. If permission isn't provided through this prompt, to deploy this example you must explicitly pass `--capabilities CAPABILITY_IAM` to the `sam deploy` command.
 * **Save arguments to samconfig.toml**: If set to yes, your choices will be saved to a configuration file inside the project, so that in the future you can just re-run `sam deploy` without parameters to deploy changes to your application.
 
-You can find your API Gateway Endpoint URL in the output values displayed after deployment.
+You can find your deployed Lambda Fynction ARN in the output values displayed after deployment.
 
 ## Use the SAM CLI to build and test locally
 
@@ -59,14 +63,14 @@ Build your application with the `sam build --use-container` command.
 lambda-bedrock-app$ sam build --use-container
 ```
 
-The SAM CLI installs dependencies defined in `hello_world/requirements.txt`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
+The SAM CLI installs dependencies defined in `lambda_bedrock/requirements.txt`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
 
 Test a single function by invoking it directly with a test event. An event is a JSON document that represents the input that the function receives from the event source. Test events are included in the `events` folder in this project.
 
 Run functions locally and invoke them with the `sam local invoke` command.
 
 ```bash
-lambda-bedrock-app$ sam local invoke HelloWorldFunction --event events/event.json
+lambda-bedrock-app$ sam local invoke LambdaBedrockFunction --event events/event.json
 ```
 
 The SAM CLI can also emulate your application's API. Use the `sam local start-api` to run the API locally on port 3000.
@@ -74,17 +78,6 @@ The SAM CLI can also emulate your application's API. Use the `sam local start-ap
 ```bash
 lambda-bedrock-app$ sam local start-api
 lambda-bedrock-app$ curl http://localhost:3000/
-```
-
-The SAM CLI reads the application template to determine the API's routes and the functions that they invoke. The `Events` property on each function's definition includes the route and method for each path.
-
-```yaml
-      Events:
-        HelloWorld:
-          Type: Api
-          Properties:
-            Path: /hello
-            Method: get
 ```
 
 ## Add a resource to your application
@@ -97,7 +90,7 @@ To simplify troubleshooting, SAM CLI has a command called `sam logs`. `sam logs`
 `NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
 
 ```bash
-lambda-bedrock-app$ sam logs -n HelloWorldFunction --stack-name "lambda-bedrock-app" --tail
+lambda-bedrock-app$ sam logs -n LambdaBedrockFunction --stack-name "lambda-bedrock-app" --tail
 ```
 
 You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
