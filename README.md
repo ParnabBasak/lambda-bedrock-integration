@@ -26,7 +26,7 @@ The following Lambda Language Runtimes are supported:
 ### Prerequisites
 
 - [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html)
-- * [Python 3 installed](https://www.python.org/downloads/) to build and deploy using AWS SAM
+- [Python 3 installed](https://www.python.org/downloads/) to build and deploy using AWS SAM
 - Language specific runtimes for local testing
 
 ### Cloning the repository
@@ -41,7 +41,7 @@ git clone git@github.com:ParnabBasak/lambda-bedrock-integration.git
 
 This application can be used with a variety of LLMs via Amazon Bedrock. See [Supported models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html#models-supported) for a complete list.
 
-By default, this application uses **Anthropic Claude v2** to generate responses.
+By default, this application uses **Anthropic Claude v2** to generate responses. You can change that to other Amazon Bedrock supported FMs.
 
 > **Important**
 > Before you can use these models with this application, **you must request access in the Amazon Bedrock console**. See the [Model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html) section of the Bedrock User Guide for detailed instructions.
@@ -50,6 +50,10 @@ By default, this application uses **Anthropic Claude v2** to generate responses.
 ### Implementing language specific code
 
 The respective named sub directories have the detailed instructions to deploy the AWS SAM application. Navigate to your preferred language runtime and follow the instructions there.
+
+```
+cd ~/<Your Preferred Language Runtime>/lambda-bedrock-app/
+```
 
 ## License
 
