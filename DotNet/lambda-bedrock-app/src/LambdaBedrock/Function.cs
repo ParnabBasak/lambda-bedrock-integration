@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.IO;
 
-
+using Amazon;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.APIGatewayEvents;
 
@@ -28,7 +28,8 @@ namespace LambdaBedrock
 
         public Function()
         {
-            this._bedrockRuntimeClient = new AmazonBedrockRuntimeClient();
+            RegionEndpoint? region = RegionEndpoint.GetBySystemName(Environment.GetEnvironmentVariable("AWS_REGION"));
+            this._bedrockRuntimeClient = new AmazonBedrockRuntimeClient(region);
         }
 
         private static async Task<IFoundationModelResponse?> InvokeBedrock(string prompt,AmazonBedrockRuntimeClient _bedrockRuntimeClient)
@@ -56,7 +57,7 @@ namespace LambdaBedrock
             string prompt = "\n\nHuman:explain black holes to 8th graders in 3 sentences\n\nAssistant:";
             
             var model_response = await InvokeBedrock(prompt, _bedrockRuntimeClient);
-            var body = model_response.GetResponse();
+            var body? = model_response.GetResponse();
 
             return new APIGatewayProxyResponse
             {
