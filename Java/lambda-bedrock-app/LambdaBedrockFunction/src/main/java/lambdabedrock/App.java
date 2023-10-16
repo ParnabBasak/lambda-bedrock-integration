@@ -1,14 +1,10 @@
 package lambdabedrock;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 import org.json.JSONObject;
 
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import com.amazonaws.services.lambda.runtime.Context;
@@ -21,19 +17,28 @@ import software.amazon.awssdk.services.bedrockruntime.BedrockRuntimeClient;
 import software.amazon.awssdk.services.bedrockruntime.model.InvokeModelRequest;
 import software.amazon.awssdk.services.bedrockruntime.model.InvokeModelResponse;
 
+import util.BedrockRequestBody;
+
 /**
  * Handler for requests to Lambda function.
  */
 public class App implements RequestHandler<Map<String,String>, APIGatewayProxyResponseEvent> {
 
-    //Region region = Region.US_EAST_1;
     Region region = Region.of(System.getenv("AWS_REGION"));
 
     BedrockRuntimeClient runtime = BedrockRuntimeClient.builder()
                 .region(region)
                 .build();
 
-    String prompt = "Generate a list of names for a fun brand of chili sauce";
+    private static final String PROMPT = """
+                Generate a list of names for a fun brand of chili sauce    
+                    """;
+
+    // Uncomment the model Id you want to use. Only one model Id is allaowed.                    
+    private static final String MODEL_ID = "anthropic.claude-v2";
+    //private static final String MODEL_ID = "ai21.j2-mid-v1";
+    //private static final String MODEL_ID = "amazon.titan-tg1-large";
+    //private static final String MODEL_ID = "cohere.command-text-v14";
 
     @Override
     public APIGatewayProxyResponseEvent handleRequest(Map<String,String> event, Context context) {
@@ -45,23 +50,23 @@ public class App implements RequestHandler<Map<String,String>, APIGatewayProxyRe
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent()
                 .withHeaders(headers);
 
-        JSONObject jsonBody = new JSONObject()
-                .put("prompt", "Human: " + prompt + " Assistant:")
-                .put("temperature", 0.8)
-                .put("max_tokens_to_sample", 1024);
+        String bedrockBody = BedrockRequestBody.builder()
+                .withModelId(MODEL_ID)
+                .withPrompt(PROMPT)
+                .withInferenceParameter("max_tokens_to_sample", 2048)
+                .withInferenceParameter("temperature", 0.5)
+                .withInferenceParameter("top_k", 250)
+                .withInferenceParameter("top_p", 1)
+                .build();
 
-        SdkBytes body = SdkBytes.fromUtf8String(
-               jsonBody.toString()
-        );
-
-        InvokeModelRequest request = InvokeModelRequest.builder()
-                .modelId("anthropic.claude-v2")
-                .body(body)
+        InvokeModelRequest invokeModelRequest = InvokeModelRequest.builder()
+                .modelId(MODEL_ID)
+                .body(SdkBytes.fromString(bedrockBody, Charset.defaultCharset()))
                 .build();
         
         try {
             
-            InvokeModelResponse model_response = runtime.invokeModel(request);
+            InvokeModelResponse model_response = runtime.invokeModel(invokeModelRequest);
 
             JSONObject jsonObject = new JSONObject(
                     model_response.body().asString(StandardCharsets.UTF_8)
