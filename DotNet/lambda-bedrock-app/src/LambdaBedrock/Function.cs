@@ -57,7 +57,7 @@ namespace LambdaBedrock
             string prompt = "\n\nHuman:explain black holes to 8th graders in 3 sentences\n\nAssistant:";
             
             var model_response = await InvokeBedrock(prompt, _bedrockRuntimeClient);
-            var body? = model_response.GetResponse();
+            var body = model_response.GetResponse();
 
             return new APIGatewayProxyResponse
             {
